@@ -10,13 +10,14 @@ FROM alpine:3.19
 RUN set -eux; \
 # alpine already has a gid 999, so we'll use the next id
 	addgroup -S -g 1000 valkey; \
-	adduser -S -G valkey -u 999 valkey
+	adduser -S -G valkey -u 1000 -s /bin/bash valkey
 
 # runtime dependencies
 RUN set -eux; \
 	apk add --no-cache \
 # add tzdata for https://github.com/docker-library/valkey/issues/138
 		tzdata \
+    bash \
 	;
 
 # grab gosu for easy step-down from root
