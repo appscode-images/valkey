@@ -10,7 +10,7 @@ FROM alpine:3.21
 RUN set -eux; \
 # alpine already has a gid 999, so we'll use the next id
 	addgroup -S -g 1000 valkey; \
-	adduser -S -G valkey -u 999 valkey
+	adduser -S -G valkey -u 1000 -s /bin/bash valkey
 
 # runtime dependencies
 RUN set -eux; \
@@ -19,6 +19,7 @@ RUN set -eux; \
 		tzdata \
 		# add setpriv for step down from root.
 		setpriv \
+    bash \
 	;
 
 ENV VALKEY_VERSION 8.0.2
